@@ -13,6 +13,8 @@ add_library(windows
     STATIC
         src/windows/window_base.h
         src/windows/choose_number_window.cpp
+        src/windows/input_name_window.cpp 
+        src/windows/recorder_window.cpp
 )
 add_library(backends
     STATIC

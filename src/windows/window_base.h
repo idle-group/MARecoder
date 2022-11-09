@@ -2,6 +2,7 @@
 #define WINDOW_BASE_H
 #include "imgui.h"
 #include <locale>
+#include <sys/types.h>
 #include <vector>
 class windowBase {
   public:
@@ -25,6 +26,7 @@ class recorderWindow : public windowBase {
     std::vector<char*> userNames;
     // 当前用户和当前轮次
     int currentUser = 0;
+
     int currentRound = 0;
 
     // 橙 绿 红 蓝 黄
@@ -39,7 +41,19 @@ class recorderWindow : public windowBase {
     void drawAuctionAct();
 
     // 五种拍卖方式的处理函数
-    
+    // 秘密拍卖
+    void secretAuc(int fromUser, int toUser,int color,int price);
+    // 公开拍卖
+    void openAuc(int fromUser,int toUser,int color,int price);
+    // 依次拍卖
+    void orderAuc(int fromUser,int toUser,int color,int price);
+    // 一口价拍卖
+    void onceAuc(int fromUser, int toUser, int color, int price);
+    // 联合拍卖
+    void unionAuc(int fromUser,int nextUser,int toUser,int color,int price);
+
+    // 发牌
+    void dealCards();
 };
 
 class inputNameWindow : public windowBase {
