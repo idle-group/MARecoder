@@ -4,6 +4,7 @@
 #include <locale>
 #include <sys/types.h>
 #include <vector>
+#include <array>
 class windowBase {
   public:
     windowBase() = default;
@@ -26,13 +27,14 @@ class recorderWindow : public windowBase {
     std::vector<char*> userNames;
     // 当前用户和当前轮次
     int currentUser = 0;
-
     int currentRound = 0;
 
     // 橙 绿 红 蓝 黄
     std::vector<std::vector<int>> cardTable;
-    std::vector<std::vector<int>> userTable;
+    std::vector<std::vector<int>> userTable; // userTable[user][0] 资金 userTable[user][1] 手牌数 
 
+    // 各位玩家在每个轮次的买到的牌
+    std::vector<std::array<int,4>> userOwn;
   public:
     recorderWindow(inputNameWindow* input);
     bool draw();
@@ -52,8 +54,16 @@ class recorderWindow : public windowBase {
     // 联合拍卖
     void unionAuc(int fromUser,int nextUser,int toUser,int color,int price);
 
+    // cardTable 更新
+    void updateCardTable();
     // 发牌
     void dealCards();
+    // isOverRound 判断这一轮是否结束
+    bool isOverRound();
+    // isOverGame 
+    bool isOverGame();
+    bool isOverGame(int round);
+    
 };
 
 class inputNameWindow : public windowBase {

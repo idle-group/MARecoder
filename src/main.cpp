@@ -65,7 +65,7 @@ int main() {
 
     // Recorder window
     recorderWindow* recoder = new recorderWindow(inputWindow);
-
+    delete inputWindow;
     while (!glfwWindowShouldClose(window) && recoder->isDisplay) {
         drawWindow(window, recoder);
     }
